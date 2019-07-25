@@ -1,6 +1,7 @@
-# GO-LOUD
+# 🌮🍕@ 
 
-GO LOUD OR GO HOME. LOUDBOT IS A SLACK BOT THAT SHOUTS AT YOU IF YOU SHOUT AT IT. SHOUTING IS CATHARTIC.
+~~GO LOUD OR GO HOME. LOUDBOT IS A SLACK BOT THAT SHOUTS AT YOU IF YOU SHOUT AT IT. SHOUTING IS CATHARTIC.~~
+The loudbot code has been stolen with the intent of making a slackbot that does emoji thingz!!1 \o/
 
 Configuration is injected from environment variables. A backing redis is required to remember what was shouted across runs.
 
@@ -14,7 +15,7 @@ Configuration is injected from environment variables. A backing redis is require
 ```
 REDIS_ADDRESS=localhost:6379
 SLACK_TOKEN=<your slack api token>
-WELCOME_CHANNEL=general # optional; loudie will toast here
+WELCOME_CHANNEL=general # optional; the bot will toast here
 REDIS_PREFIX=LOUDBOT # defaults to `LB`; namespace for redis keys
 ```
 
@@ -29,22 +30,22 @@ go build
 ./seedlouds # db is now seeded
 ```
 
-6. Run LOUDBOT.
+6. Run bot.
 
 ```sh
 cd ../..
 go build
-./go-loud # loudie is now running
+./go-loud # the bot is now running
 ```
 
 There's a dockerfile if you prefer not to trust your operating system.
 
 ## TODO
 
-- Read list of custom emoji & react to messages sometimes.
-- More Malcolm Tucker, but behind a feature flag.
-- ✔︎ Tool to dump redis db to a text file.
-- More random jokes.
+- change a bunch of stuffs for
+  - tracking togs and type of emoji
+  - handle multiple emoji
+  - store tagger and tagee
 
 ## LICENSE
 
