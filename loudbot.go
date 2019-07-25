@@ -30,6 +30,9 @@ var fuckityPattern *regexp.Regexp
 var malcolmPattern *regexp.Regexp
 var introPattern *regexp.Regexp
 
+// TODO: pull this from .env file
+var botname = "🎷🐋"
+
 func makeRedis() (r *redis.Client) {
 	address, found := os.LookupEnv("REDIS_ADDRESS")
 	if !found {
@@ -54,9 +57,9 @@ func makeChannelMap() {
 
 	address, found := os.LookupEnv("WELCOME_CHANNEL")
 	if found {
-		yellWithoutPrompt(findChannelByName(address), "WITNESS THE POWER OF THIS FULLY-OPERATIONAL LOUDBOT.")
+		yellWithoutPrompt(findChannelByName(address), fmt.Sprintf("heya, let's do some emoji stuffs!!1 \\o/ %s.", botname))
 	}
-	log.Println("LOUDBOT IS NOW OPERATIONAL")
+	log.Println(fmt.Sprintf("%s is worky!", botname))
 }
 
 func findChannelByName(name string) string {
@@ -167,7 +170,7 @@ func isLoud(msg string) bool {
 func yell(event *slack.MessageEvent, msg string) {
 	channelID, _, err := api.PostMessage(event.Channel,
 		slack.MsgOptionText(msg, false),
-		slack.MsgOptionUsername("LOUDBOT"),
+		slack.MsgOptionUsername(botname),
 		slack.MsgOptionTS(event.ThreadTimestamp),
 		slack.MsgOptionPostMessageParameters(slack.PostMessageParameters{
 			UnfurlLinks: true,
@@ -184,7 +187,7 @@ func yell(event *slack.MessageEvent, msg string) {
 func yellWithoutPrompt(channel string, msg string) {
 	channelID, _, err := api.PostMessage(channel,
 		slack.MsgOptionText(msg, false),
-		slack.MsgOptionUsername("LOUDBOT"),
+		slack.MsgOptionUsername(botname),
 		slack.MsgOptionPostMessageParameters(slack.PostMessageParameters{
 			UnfurlLinks: true,
 			UnfurlMedia: true,
@@ -251,7 +254,8 @@ func main() {
 		yourBasicShout,
 	}
 
-	api = slack.New(slacktoken)
+	// api = slack.New(slacktoken)
+	api = slack.New(slacktoken, slack.OptionDebug(true))
 	rtm := api.NewRTM()
 	go rtm.ManageConnection()
 
